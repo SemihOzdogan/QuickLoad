@@ -7,7 +7,7 @@ import UserDetail from './src/screens/UserDetail';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 const Stack = createNativeStackNavigator();
-
+console.log("111");
 export default function App() {
   return (
     <NavigationContainer>
