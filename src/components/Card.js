@@ -1,25 +1,81 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, TextInput, Image } from 'react-native';
-export default Card = ({ item, navigation }) => {
+import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
+
+const Card = ({ item, navigation }) => {
+    const {
+        container,
+        cardSize,
+        cardSizeCnt,
+        cardImage,
+        cardTitleCnt,
+        cardTitle,
+        cardTitleText,
+    } = styles;
     return (
-        <View style={{ backgroundColor: '#ddd', borderRadius: 8 }}>
-            <View style={{ width: '100%', height: 100, alignItems: 'center', justifyContent: 'center', borderRadius: 190 }}>
-                <View style={{ width: 80, height: 80, borderRadius: 50 }}>
-                    <Image style={{ width: '100%', height: '100%', borderRadius: 72 }} source={{ uri: item.picture }} resizeMode="cover" />
+        <TouchableOpacity
+            onPress={() =>
+                navigation.navigate('Detail', {
+                    userID: item.id,
+                })
+            }>
+            <View style={container}>
+                <View style={cardSize}>
+                    <View style={cardSizeCnt}>
+                        <Image
+                            style={cardImage}
+                            source={{ uri: item.picture }}
+                            resizeMode="cover"
+                        />
+                    </View>
+                </View>
+                <View style={cardTitleCnt}>
+                    <View style={cardTitle}>
+                        <Text numberOfLines={1} style={cardTitleText}>
+                            {item.firstName} {item.lastName}
+                        </Text>
+                    </View>
                 </View>
             </View>
-            <View style={{ flex: 1, backgroundColor: '#ccc', paddingVertical: 10, borderBottomLeftRadius: 8, borderBottomRightRadius: 8 }}>
-                <View style={{ flex: 1, alignItems: 'center' }}>
-                    <Text numberOfLines={1} style={{ fontSize: 16 }}>{item.firstName} {item.lastName}</Text>
-                </View>
-                <View style={{ flex: 1, alignItems: 'center', marginVertical: 5 }}>
-                    <TouchableOpacity onPress={() => navigation.navigate('Detail', {
-                        userID: item.id
-                    })} style={{ borderWidth: 1, borderColor: '#aaa', borderRadius: 8, paddingHorizontal: 20, }}>
-                        <Text style={{ fontSize: 14 }}>Details</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
-        </View>
-    )
-}
+        </TouchableOpacity>
+    );
+};
+
+export default Card;
+
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: '#ddd',
+        borderRadius: 8,
+    },
+    cardSize: {
+        width: '100%',
+        height: 100,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 190,
+    },
+    cardSizeCnt: {
+        width: 80,
+        height: 80,
+        borderRadius: 50,
+    },
+    cardImage: {
+        width: '100%',
+        height: '100%',
+        borderRadius: 72,
+    },
+    cardTitleCnt: {
+        flex: 1,
+        backgroundColor: '#ccc',
+        paddingVertical: 10,
+        borderBottomLeftRadius: 8,
+        borderBottomRightRadius: 8,
+    },
+    cardTitle: {
+        flex: 1,
+        alignItems: 'center',
+    },
+    cardTitleText: {
+        fontSize: 16,
+    },
+});
